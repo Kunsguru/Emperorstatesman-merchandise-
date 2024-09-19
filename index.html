@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Generation - EmperorStatesman Merchandise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .receipt {
+            display: none;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .receipt p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .receipt-number {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>EmperorStatesman Merchandise.</h2>
+        
+        <label for="name">Buyer Name</label>
+        <input type="text" id="name" placeholder="Enter buyer's name">
+
+        <label for="email">Buyer Email</label>
+        <input type="email" id="email" placeholder="Enter buyer's email">
+
+        <label for="phone">Buyer Phone</label>
+        <input type="text" id="phone" placeholder="Enter buyer's phone">
+
+        <label for="product_item">Product Item</label>
+        <input type="text" id="product_item" placeholder="Enter Product Item Name">
+        	
+        <label for="product_item_description">Product Item Description</label>
+        <input type="text" id="product_item_description" placeholder="Enter Product Item Description">
+
+        <label for="amount">Amount Paid (₦)</label>
+        <input type="number" id="amount" placeholder="Enter amount paid">
+        	
+        <label for="notes">Notes</label>
+        <input type="text" id="notes" placeholder="Additional Notes">
+        	
+        <button onclick="generateReceipt()">Submit</button>
+
+        <div class="receipt" id="receipt">
+            <p><strong>Business Name:</strong> EmperorStatesman Merchandise</p>
+            <p><strong>Business Telephone:</strong> 07045786155</p>
+            <p><strong>Receipt No:</strong> <span id="receiptNumber" class="receipt-number"></span></p>
+            <p><strong>Buyer Name:</strong> <span id="buyerName"></span></p>
+            <p><strong>Email:</strong> <span id="buyerEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="buyerPhone"></span></p>
+            <p><strong>Product Item:</strong> <span id="buyerProductItem"></span></p>
+            <p><strong>Product Item Description:</strong> <span id="buyerProductItemDescription"></span></p>
+            <p><strong>Amount Paid:</strong> ₦<span id="paidAmount"></span></p>
+            <p><strong>Date:</strong> <span id="receiptDate"></span></p>
+            <p><strong>Notes:</strong> <span id="buyerNotes"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function generateReceipt() {
+            // Get buyer details
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const productItem = document.getElementById('product_item').value;
+            const productItemDescription = document.getElementById('product_item_description').value;
+            const amount = document.getElementById('amount').value;
+            const notes = document.getElementById('notes').value;
+
+            // Generate unique receipt number
+            const receiptNumber = productItem + '-' + Math.floor(Math.random() * 1000000);
+
+            // Get current date
+            const today = new Date().toLocaleDateString();
+
+            // Display the receipt details
+            document.getElementById('buyerName').innerText = name;
+            document.getElementById('buyerEmail').innerText = email;
+            document.getElementById('buyerPhone').innerText = phone;
+            document.getElementById('buyerProductItem').innerText = productItem;
+            document.getElementById('buyerProductItemDescription').innerText = productItemDescription;
+            document.getElementById('paidAmount').innerText = amount;
+            document.getElementById('receiptNumber').innerText = receiptNumber;
+            document.getElementById('receiptDate').innerText = today;
+            document.getElementById('buyerNotes').innerText = notes;
+
+            // Show the receipt
+            document.getElementById('receipt').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
